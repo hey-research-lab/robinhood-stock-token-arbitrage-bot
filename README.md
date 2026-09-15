@@ -65,7 +65,7 @@ Never commit `.env`. Never put a private key in source.
    - https://docs.robinhood.com/chain/oracles-and-price-feeds/
 6. Optional: `UNISWAP_API_KEY` from the [Uniswap developer portal](https://developers.uniswap.org/). Without it, DEX quotes are stubs and the opportunity engine will reject them.
 7. `npm test`
-8. `npm start` — registry + REST (+ onchain if RPC) + Uniswap quotes + opportunity scan + risk + **paper fills**. No chain transactions unless `LIVE_TRADING=true`.
+8. `npm start` - registry + REST (+ onchain if RPC) + Uniswap quotes + opportunity scan + risk + **paper fills**. No chain transactions unless `LIVE_TRADING=true`.
 
 Without an RPC URL, REST still runs; onchain multiplier and Chainlink reads are skipped.
 
@@ -112,8 +112,8 @@ An opportunity is flagged only if net edge clears **both** `MIN_NET_EDGE_BPS` (5
 
 Two kinds:
 
-1. **reference_vs_onchain** — live Uniswap executable vs fresh Chainlink (preferred) or REST mid, after multiplier normalization. This is a drift signal, not mint/redeem arb.
-2. **cross_venue** — buy one live DEX, sell another. Arcus/Pleiades adapters still throw until you confirm addresses/ABIs. Covered by a fixture test only.
+1. **reference_vs_onchain** - live Uniswap executable vs fresh Chainlink (preferred) or REST mid, after multiplier normalization. This is a drift signal, not mint/redeem arb.
+2. **cross_venue** - buy one live DEX, sell another. Arcus/Pleiades adapters still throw until you confirm addresses/ABIs. Covered by a fixture test only.
 
 Stub Uniswap quotes (`UNISWAP_API_KEY` empty) are logged and rejected.
 
@@ -142,8 +142,8 @@ Paper scanning and paper fills still run without eligibility. Strategy/live exec
 
 `executeTrade` always calls the risk engine first. Paper is the default:
 
-1. **Paper** (`LIVE_TRADING` unset/false) — simulate fill at the quoted executable, worse by `MAX_SLIPPAGE_BPS`, subtract modeled fees/gas/buffer, mark `submitted` → `pending` → `confirmed`, `recordFill` on the in-memory book. `txHash` is `paper:<opportunityId>`. No `sendTransaction`.
-2. **Live** (`LIVE_TRADING=true`) — eligibility required. Re-quote Uniswap, refuse if the executable moved more than max slippage, `POST /check_approval` then `POST /swap` with Universal Router **2.1.1** on chain **4663**, validate `swap.to` is the documented router, broadcast, then wait for the receipt. `submitted` (hash) is distinct from `confirmed`/`failed`. Fills are recorded only on success.
+1. **Paper** (`LIVE_TRADING` unset/false) - simulate fill at the quoted executable, worse by `MAX_SLIPPAGE_BPS`, subtract modeled fees/gas/buffer, mark `submitted` → `pending` → `confirmed`, `recordFill` on the in-memory book. `txHash` is `paper:<opportunityId>`. No `sendTransaction`.
+2. **Live** (`LIVE_TRADING=true`) - eligibility required. Re-quote Uniswap, refuse if the executable moved more than max slippage, `POST /check_approval` then `POST /swap` with Universal Router **2.1.1** on chain **4663**, validate `swap.to` is the documented router, broadcast, then wait for the receipt. `submitted` (hash) is distinct from `confirmed`/`failed`. Fills are recorded only on success.
 
 Live `reference_vs_onchain` is a **single Uniswap swap vs USDG**, not mint/redeem and not a locked two-leg arb. Cross-venue live is refused until Arcus/Pleiades are wired. UniswapX live is refused (needs Permit2/order signing).
 
