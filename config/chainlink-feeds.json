@@ -1,0 +1,20 @@
+{
+  "_readme": "Fill proxy addresses yourself from official Chainlink / Robinhood docs. This file is intentionally empty so the bot never ships guessed feed addresses. Env CHAINLINK_FEED_<SYMBOL> overrides these keys.",
+  "_sources": [
+    "https://docs.chain.link/data-feeds/tokenized-equity-feeds/robinhood",
+    "https://docs.chain.link/data-feeds/price-feeds/addresses",
+    "https://docs.robinhood.com/chain/oracles-and-price-feeds/"
+  ],
+  "feeds": {
+    "AAPL": "",
+    "NVDA": "",
+    "MSFT": "",
+    "AMZN": "",
+    "GOOGL": "",
+    "META": "",
+    "TSLA": "",
+    "AVGO": "",
+    "UNH": "",
+    "SPY": ""
+  }
+}

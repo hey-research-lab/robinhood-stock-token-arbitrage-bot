@@ -1,0 +1,40 @@
+{
+  "name": "robinhood-stock-token-arbitrage-bot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Robinhood Stock Token arbitrage bot for Robinhood Chain (chain ID 4663). Paper-first DEX arb of onchain RHJ ERC-20 stock tokens vs Uniswap, Chainlink, and REST — not mint/redeem.",
+  "keywords": [
+    "robinhood",
+    "robinhood chain",
+    "robinhood stock token",
+    "stock token",
+    "arbitrage bot",
+    "tokenized stocks",
+    "RHJ",
+    "uniswap",
+    "chainlink",
+    "USDG",
+    "chain 4663"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx src/index.ts",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "viem": "^2.37.9"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
